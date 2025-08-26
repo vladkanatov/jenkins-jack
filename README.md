@@ -32,6 +32,10 @@ Honestly, not that much more.
     * Download a build's replay script
     * Delete one or more builds
     * Open build in web browser
+* Global Variables Jack
+    * View, create, update, and delete Jenkins global environment variables
+    * Export/import global variables as JSON
+    * Copy variable names and usage examples to clipboard
 * Add, delete, edit, and select Jenkins host connections
 * Pipeline (GDSL) auto-completions for `groovy` files
 * Tree Views
@@ -49,6 +53,10 @@ Honestly, not that much more.
         * View nodes on the host
         * Disable (with offline message), enable, disconnect nodes on the targeted host
         * Update one or more nodes labels
+    * Global Variables Tree
+        * View and manage Jenkins global environment variables
+        * Create, edit, and delete global variables
+        * Copy variable names and usage examples
 
 ## Jacks!
 
@@ -61,6 +69,7 @@ See [COMMANDS.md](COMMANDS.md) for a more comprehensive list of commands and the
 |__Build__|Delete/abort builds, stream logs, and pull Pipeline replay scripts from your Jenkins host.|`extension.jenkins-jack.build`|
 |__Job__|Disable/enable/delete one or more jobs from your remote Jenkins.|`extension.jenkins-jack.job`|
 |__Node__|Disable/enable/disconnect one or more agents from your remote Jenkins. Mass update agent labels as well.|`extension.jenkins-jack.node`|
+|__Global Variables__|Manage Jenkins global environment variables. Create, update, delete, export/import global variables.|`extension.jenkins-jack.globalVariables`|
 
 Individual jacks can be mapped to hot keys as user sees fit.
 

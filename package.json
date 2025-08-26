@@ -114,6 +114,10 @@
           "when": "never"
         },
         {
+          "command": "extension.jenkins-jack.tree.globalVariables.add",
+          "when": "never"
+        },
+        {
           "command": "extension.jenkins-jack.tree.globalVariables.copy",
           "when": "never"
         },
@@ -189,6 +193,11 @@
         },
         {
           "command": "extension.jenkins-jack.tree.globalVariables.refresh",
+          "when": "view == globalVariablesTree",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.add",
           "when": "view == globalVariablesTree",
           "group": "navigation"
         }
@@ -739,6 +748,12 @@
         "title": "Refresh",
         "category": "Jenkins Jack: Global Variables Tree",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "extension.jenkins-jack.tree.globalVariables.add",
+        "title": "Add Global Variable",
+        "category": "Jenkins Jack: Global Variables Tree",
+        "icon": "$(add)"
       },
       {
         "command": "extension.jenkins-jack.tree.globalVariables.copy",

@@ -8,14 +8,18 @@ export class GlobalVariableTreeItem extends vscode.TreeItem {
         public readonly collapsibleState: vscode.TreeItemCollapsibleState = vscode.TreeItemCollapsibleState.None
     ) {
         super(globalVariable.name, collapsibleState);
-        this.tooltip = `${this.globalVariable.name}: ${this.globalVariable.value}`;
+        this.tooltip = `${this.globalVariable.name}: ${this.globalVariable.value}${this.globalVariable.description ? '\n' + this.globalVariable.description : ''}`;
         this.description = this.globalVariable.value.length > 50 
             ? this.globalVariable.value.substring(0, 47) + '...' 
             : this.globalVariable.value;
         this.contextValue = 'globalVariable';
 
-        // Иконка для переменной
-        this.iconPath = new vscode.ThemeIcon('symbol-variable');
+        // Иконка для переменной с цветом в зависимости от значения
+        if (this.globalVariable.value) {
+            this.iconPath = new vscode.ThemeIcon('symbol-variable', new vscode.ThemeColor('charts.green'));
+        } else {
+            this.iconPath = new vscode.ThemeIcon('symbol-variable', new vscode.ThemeColor('charts.orange'));
+        }
     }
 }
 
@@ -37,6 +41,10 @@ export class GlobalVariablesTree implements vscode.TreeDataProvider<GlobalVariab
         // Команды для контекстного меню
         ext.context.subscriptions.push(vscode.commands.registerCommand('extension.jenkins-jack.tree.globalVariables.refresh', () => {
             this.refresh();
+        }));
+
+        ext.context.subscriptions.push(vscode.commands.registerCommand('extension.jenkins-jack.tree.globalVariables.add', () => {
+            this.addVariable();
         }));
 
         ext.context.subscriptions.push(vscode.commands.registerCommand('extension.jenkins-jack.tree.globalVariables.copy', (item: GlobalVariableTreeItem) => {
@@ -96,6 +104,51 @@ export class GlobalVariablesTree implements vscode.TreeDataProvider<GlobalVariab
         }
 
         return [];
+    }
+
+    private async addVariable() {
+        const name = await vscode.window.showInputBox({
+            prompt: 'Введите имя новой глобальной переменной',
+            placeHolder: 'MY_GLOBAL_VAR',
+            validateInput: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Имя переменной не может быть пустым';
+                }
+                if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(value.trim())) {
+                    return 'Имя переменной может содержать только буквы, цифры и подчеркивания';
+                }
+                return null;
+            }
+        });
+
+        if (!name) return;
+
+        const value = await vscode.window.showInputBox({
+            prompt: 'Введите значение переменной',
+            placeHolder: 'Значение переменной'
+        });
+
+        if (value === undefined) return;
+
+        const description = await vscode.window.showInputBox({
+            prompt: 'Введите описание переменной (необязательно)',
+            placeHolder: 'Описание переменной'
+        });
+
+        try {
+            await vscode.window.withProgress({
+                location: vscode.ProgressLocation.Window,
+                title: 'Создание глобальной переменной...',
+                cancellable: false
+            }, async () => {
+                await ext.globalVariablesJack.setGlobalVariable(name.trim(), value, description || '');
+            });
+
+            vscode.window.showInformationMessage(`Глобальная переменная '${name}' создана успешно.`);
+            this.refresh();
+        } catch (error) {
+            vscode.window.showErrorMessage(`Ошибка при создании переменной: ${error}`);
+        }
     }
 
     private async editVariable(globalVariable: GlobalVariable) {
