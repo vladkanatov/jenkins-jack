@@ -14,6 +14,8 @@ import { ConnectionsTree } from "./connectionsTree";
 import { Logger } from "./logger";
 import { QueueJack } from "./queueJack";
 import { QueueTree } from "./queueTree";
+import { GlobalVariablesJack } from "./globalVariablesJack";
+import { GlobalVariablesTree } from "./globalVariablesTree";
 
 /**
  * Namespace for common variables used throughout the extension. They must be initialized in the activate() method of extension.ts
@@ -30,12 +32,14 @@ export namespace ext {
     export let buildJack: BuildJack;
     export let jobJack: JobJack;
     export let queueJack: QueueJack;
+    export let globalVariablesJack: GlobalVariablesJack;
 
     export let connectionsTree: ConnectionsTree;
     export let jobTree: JobTree;
     export let pipelineTree: PipelineTree;
     export let nodeTree: NodeTree;
     export let queueTree: QueueTree;
+    export let globalVariablesTree: GlobalVariablesTree;
     export let connectionsManager: ConnectionsManager;
     export let logger: Logger;
 }

@@ -59,6 +59,11 @@
         {
           "id": "nodeTree",
           "name": "Nodes"
+        },
+        {
+          "id": "globalVariablesTree",
+          "name": "Global Variables",
+          "icon": "$(symbol-variable)"
         }
       ]
     },
@@ -102,6 +107,30 @@
         },
         {
           "command": "extension.jenkins-jack.tree.queue.refresh",
+          "when": "never"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.refresh",
+          "when": "never"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.copy",
+          "when": "never"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.copyName",
+          "when": "never"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.copyUsage",
+          "when": "never"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.edit",
+          "when": "never"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.delete",
           "when": "never"
         }
       ],
@@ -156,6 +185,11 @@
         {
           "command": "extension.jenkins-jack.tree.queue.refresh",
           "when": "view == queueTree",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.refresh",
+          "when": "view == globalVariablesTree",
           "group": "navigation"
         }
       ],
@@ -333,6 +367,31 @@
         {
           "command": "extension.jenkins-jack.queue.cancel",
           "when": "view == queueTree",
+          "group": "action"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.copy",
+          "when": "view == globalVariablesTree && viewItem == globalVariable",
+          "group": "inline"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.edit",
+          "when": "view == globalVariablesTree && viewItem == globalVariable",
+          "group": "inline"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.copyName",
+          "when": "view == globalVariablesTree && viewItem == globalVariable",
+          "group": "action"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.copyUsage",
+          "when": "view == globalVariablesTree && viewItem == globalVariable",
+          "group": "action"
+        },
+        {
+          "command": "extension.jenkins-jack.tree.globalVariables.delete",
+          "when": "view == globalVariablesTree && viewItem == globalVariable",
           "group": "action"
         }
       ]
@@ -676,10 +735,85 @@
         "icon": "$(refresh)"
       },
       {
+        "command": "extension.jenkins-jack.tree.globalVariables.refresh",
+        "title": "Refresh",
+        "category": "Jenkins Jack: Global Variables Tree",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "extension.jenkins-jack.tree.globalVariables.copy",
+        "title": "Copy Value",
+        "category": "Jenkins Jack: Global Variables Tree",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "extension.jenkins-jack.tree.globalVariables.copyName",
+        "title": "Copy Name",
+        "category": "Jenkins Jack: Global Variables Tree"
+      },
+      {
+        "command": "extension.jenkins-jack.tree.globalVariables.copyUsage",
+        "title": "Copy Usage",
+        "category": "Jenkins Jack: Global Variables Tree"
+      },
+      {
+        "command": "extension.jenkins-jack.tree.globalVariables.edit",
+        "title": "Edit",
+        "category": "Jenkins Jack: Global Variables Tree",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "extension.jenkins-jack.tree.globalVariables.delete",
+        "title": "Delete",
+        "category": "Jenkins Jack: Global Variables Tree",
+        "icon": "$(trash)"
+      },
+      {
         "command": "extension.jenkins-jack.queue.cancel",
         "title": "Cancel",
         "category": "Jenkins Jack: Cancel",
         "icon": "$(stop)"
+      },
+      {
+        "command": "extension.jenkins-jack.globalVariables",
+        "title": "Global Variables Jack",
+        "category": "Jenkins Jack"
+      },
+      {
+        "command": "extension.jenkins-jack.globalVariables.list",
+        "title": "List",
+        "category": "Jenkins Jack: Global Variables",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "extension.jenkins-jack.globalVariables.create",
+        "title": "Create",
+        "category": "Jenkins Jack: Global Variables",
+        "icon": "$(plus)"
+      },
+      {
+        "command": "extension.jenkins-jack.globalVariables.update",
+        "title": "Update",
+        "category": "Jenkins Jack: Global Variables",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "extension.jenkins-jack.globalVariables.delete",
+        "title": "Delete",
+        "category": "Jenkins Jack: Global Variables",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "extension.jenkins-jack.globalVariables.export",
+        "title": "Export",
+        "category": "Jenkins Jack: Global Variables",
+        "icon": "$(export)"
+      },
+      {
+        "command": "extension.jenkins-jack.globalVariables.import",
+        "title": "Import",
+        "category": "Jenkins Jack: Global Variables",
+        "icon": "$(import)"
       },
       {
         "command": "extension.jenkins-jack.connections.select",

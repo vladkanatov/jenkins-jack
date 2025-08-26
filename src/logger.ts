@@ -54,7 +54,15 @@ export class Logger {
         catch (e) {
             let ex = e as any;
             // HACK: parses the call-stack for a specific line to grab the calling module
-            caller = ex.stack.split('\n')[3].match(/.*[\/|\\](.*)\.js.*/)[1];
+            if (ex.stack) {
+                const stackLines = ex.stack.split('\n');
+                if (stackLines.length > 3) {
+                    const match = stackLines[3].match(/.*[\/|\\](.*)\.js.*/);
+                    if (match && match[1]) {
+                        caller = match[1];
+                    }
+                }
+            }
         }
         let logLine = `[${dayjs().format('DD-MM-YYYY HH:mm:ss')}] [${caller}] [${this.levelStringMap[level]}] - ${message}`;
 

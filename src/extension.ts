@@ -17,6 +17,8 @@ import { ConnectionsTree } from './connectionsTree';
 import { Logger } from './logger';
 import { QueueJack } from './queueJack';
 import { QueueTree } from './queueTree';
+import { GlobalVariablesJack } from './globalVariablesJack';
+import { GlobalVariablesTree } from './globalVariablesTree';
 
 export async function activate(context: vscode.ExtensionContext) {
 
@@ -57,6 +59,9 @@ export async function activate(context: vscode.ExtensionContext) {
     ext.queueJack = new QueueJack();
     commandSets.push(ext.queueJack);
 
+    ext.globalVariablesJack = new GlobalVariablesJack();
+    commandSets.push(ext.globalVariablesJack);
+
     commandSets.push(ext.connectionsManager);
 
     ext.logger.info('Extension Jenkins Jack now active!');
@@ -87,6 +92,7 @@ export async function activate(context: vscode.ExtensionContext) {
     ext.jobTree = new JobTree();
     ext.queueTree = new QueueTree();
     ext.nodeTree = new NodeTree();
+    ext.globalVariablesTree = new GlobalVariablesTree();
 }
 
 export function deactivate() {}
